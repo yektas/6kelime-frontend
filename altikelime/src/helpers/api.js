@@ -6,7 +6,7 @@ const HEADERS = {
     'Accept-Language': 'tr',
 };
 
-const BASE_URL = 'http://192.168.1.101:8000';
+const BASE_URL = 'http://127.0.0.1:8000';
 
 class API {
     request(method, path, body, isFullPath = false) {
