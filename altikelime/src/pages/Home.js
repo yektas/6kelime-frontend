@@ -45,12 +45,8 @@ export default class Home extends Component {
         {posts.map((post, index) => (
           <div key={index}>
             <Post
-              update_at={post.update_at}
-              category_name={post.category_name}
+              post={post}
               width={500}
-              username={post.user.username}
-              content={post.content}
-              isLike={post.is_like}
               loading={this.state.loading}
             />
           </div>
