@@ -1,5 +1,5 @@
 import React from 'react';
-
+import userStore from '../stores/userStore';
 const HEADERS = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -17,6 +17,10 @@ class API {
                 headers: HEADERS,
                 body: undefined,
             };
+            const { user } = userStore;
+            if (localStorage.getItem('token')) {
+                requestParams.headers.Authorization = `Token ${localStorage.getItem('token')}`;
+            }
             if (body) {
                 requestParams.body = JSON.stringify(body);
             }

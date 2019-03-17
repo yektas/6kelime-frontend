@@ -13,7 +13,11 @@ class UserStore {
 	login(payload) {
 		API.request('POST', '/login/', payload).then(
 			(response) => {
-				this.setUser(response);
+				localStorage.setItem('token', response.token)
+				this.user = response;
+			}
+		).then(
+			() => {
 				message.success('Giriş Yapıldı');
 				uiStore.closeAuthModal();
 			}
