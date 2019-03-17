@@ -1,5 +1,7 @@
 import React from 'react';
 import userStore from '../stores/userStore';
+import Cookies from 'js-cookie';
+
 const HEADERS = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -17,9 +19,9 @@ class API {
                 headers: HEADERS,
                 body: undefined,
             };
-            const { user } = userStore;
-            if (localStorage.getItem('token')) {
-                requestParams.headers.Authorization = `Token ${localStorage.getItem('token')}`;
+            console.log(Cookies.get('token'))
+            if (Cookies.get('token')) {
+                requestParams.headers.Authorization = `Token ${Cookies.get('token')}`;
             }
             if (body) {
                 requestParams.body = JSON.stringify(body);

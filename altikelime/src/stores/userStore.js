@@ -2,6 +2,7 @@ import { observable, action, decorate } from 'mobx';
 import API from "../helpers/api";
 import { message } from 'antd';
 import uiStore from './uiStore';
+import Cookies from 'js-cookie';
 
 class UserStore {
 	user = null;
@@ -13,7 +14,7 @@ class UserStore {
 	login(payload) {
 		API.request('POST', '/login/', payload).then(
 			(response) => {
-				localStorage.setItem('token', response.token)
+				Cookies.set('token', response.token);
 				this.user = response;
 			}
 		).then(
