@@ -6,6 +6,7 @@ import uiStore from '../../stores/uiStore';
 import CommentModal from '../Comment/CommentModal'
 import commentStore from '../../stores/commentStore';
 import likeStore from '../../stores/likeStore';
+import userStore from '../../stores/userStore';
 
 const { Meta } = Card;
 
@@ -17,7 +18,12 @@ export default class Post extends Component {
     }
 
     like = (slug) => {
-        likeStore.setLike(slug);
+        if (userStore.user) {
+            likeStore.setLike(slug);
+        }
+        else {
+            uiStore.openAuthModal();
+        }
     }
 
     render() {
