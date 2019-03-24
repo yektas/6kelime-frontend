@@ -1,11 +1,16 @@
 import { observable, action, decorate, computed } from 'mobx';
 import API from "../helpers/api";
-import { message } from 'antd';
-import uiStore from './uiStore';
+
 
 class CommentStore {
     postSlug = ''
     comments = []
+    commentSource = [
+        'Harika bir hikaye',
+        'Muhteşem bir hikaye',
+        'Daha iyi olabilir',
+        'Fena değil'
+    ]
 
     setSlug(slug) {
         this.postSlug = slug;
@@ -23,6 +28,14 @@ class CommentStore {
                 console.log(err)
             }
         )
+    }
+
+    sendComment(comment) {
+        const payload = {
+            comment
+        }
+        API.request('POST', '/create-comment/' + this.postSlug + '/', payload)
+
     }
 
 }
