@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import uiStore from '../../stores/uiStore';
 import CommentModal from '../Comment/CommentModal'
 import commentStore from '../../stores/commentStore';
+import likeStore from '../../stores/likeStore';
 
 const { Meta } = Card;
 
@@ -15,9 +16,13 @@ export default class Post extends Component {
         uiStore.openCommentModal();
     }
 
+    like = (slug) => {
+        likeStore.setLike(slug);
+    }
+
     render() {
         const { loading, width, post } = this.props;
-        const heart = post.isLike ? <Icon type="heart" theme="filled" /> : <Icon type="heart" />
+        const heart = post.is_like ? <Icon type="heart" theme="filled" onClick={() => this.like(post.slug)} /> : <Icon type="heart" onClick={() => this.like(post.slug)} />
         return (
             <div>
                 <CommentModal />
